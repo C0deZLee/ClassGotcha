@@ -1,0 +1,11 @@
+.cropArea {
+	background: #f8fafb;
+	overflow: hidden;
+	width: 540px;
+	height: 300px;
+	position: relative;
+	display: block;
+}
+.cropArea canvas{
+	margin: 0!important;
+}
