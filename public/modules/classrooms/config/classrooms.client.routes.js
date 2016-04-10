@@ -12,7 +12,7 @@ angular.module('classrooms').config(['$stateProvider', '$urlRouterProvider',
 		state('classroom', {
 			url: '/classroom',
 			templateUrl: 'modules/classrooms/views/classrooms.client.view.html'
-
 		});
+
 	}
-]);  
+]);

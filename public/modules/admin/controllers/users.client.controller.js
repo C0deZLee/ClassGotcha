@@ -9,7 +9,7 @@ angular.module('admin').controller('UserController', ['$scope', '$http', '$q', '
 		$scope.apiList = ApiLists.getApiList('userApi');
 
 		// change user data
-        $scope.update = function(){
+    $scope.update = function(){
             $http.put("/api/0.1/user/" + $scope.data._id, $scope.data).success(function() {
                 alert("success!");
             }).error(function(err) {
@@ -37,33 +37,33 @@ angular.module('admin').controller('UserController', ['$scope', '$http', '$q', '
 			});
 		};
 
-        $scope.uploadAvatar = function(image) {
-            console.log(image);
-            $scope.uploadInProgress = true;
-            $scope.uploadProgress = 0;
+    $scope.uploadAvatar = function(image) {
+        console.log(image);
+        $scope.uploadInProgress = true;
+        $scope.uploadProgress = 0;
 
-            if (angular.isArray(image)) {
-                image = image[0];
+        if (angular.isArray(image)) {
+            image = image[0];
+        }
+
+        Upload.upload({
+            url: '/api/v1/user/me/avatar',
+            headers: {'Content-Type': 'multipart/form-data'},
+            method: 'POST',
+            data: {
+                file: image
             }
 
-            Upload.upload({
-                url: '/api/v1/user/me/avatar',
-                headers: {'Content-Type': 'multipart/form-data'},
-                method: 'POST',
-                data: {
-                    file: image
-                }
-
-            }).success(function(data, status, headers, config) {
-                //AlertService.success('Photo uploaded!');
-				console.log("upload success!");
-                $scope.$apply();
-            }).error(function(err) {
-                $scope.uploadInProgress = false;
-				console.log("upload failed!");
-				//AlertService.error('Error uploading file: ' + err.message || err);
-            });
-        };
+        }).success(function(data, status, headers, config) {
+            //AlertService.success('Photo uploaded!');
+		console.log("upload success!");
+            $scope.$apply();
+        }).error(function(err) {
+            $scope.uploadInProgress = false;
+		console.log("upload failed!");
+		//AlertService.error('Error uploading file: ' + err.message || err);
+        });
+    };
 
 		// show upload user avatar modal
 		var showAvatarModal = function(image) {

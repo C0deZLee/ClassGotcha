@@ -4,7 +4,37 @@ angular.module('admin').controller('ClassroomController', ['$scope', '$http', '$
 	function($scope, $http, $q, $timeout, ApiLists, Authentication, DTOptionsBuilder, DTColumnBuilder) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
-		$scope.apiList = ApiLists.getApiList('classroomApi'); 
+		$scope.apiList = ApiLists.getApiList('classroomApi');
+
+		// change classroom data
+
+			$scope.create = function() {
+				$http.post('/api/0.1/class', $scope.data).success(function() {
+						console.log("success!");
+				}).error(function(err) {
+					console.log(err);
+				});
+			};
+
+    $scope.update = function(){
+            $http.put("/api/0.1/class/" + $scope.data._id, $scope.data).success(function() {
+                	console.log("success!");
+            }).error(function(err) {
+                console.log(err);
+            });
+        };
+
+		$scope.delete = function(){
+			$http.delete("/api/0.1/class/" + $scope.data._id).success(function() {
+					console.log("success!");
+			}).error(function(err) {
+				console.log(err);
+			});
+		};
+
+		$scope.clear = function() {
+			$scope.data = [];
+		};
 
 		var getData = function($timeout, $q) {
 		  return function() {
@@ -22,22 +52,19 @@ angular.module('admin').controller('ClassroomController', ['$scope', '$http', '$
 		  })}
 		}
 
-		function ClickHandler(info) {
-		    $scope.data = info._id + ' - ' + info.classCode;
-		}
-		function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+
+		var rowCallback = function(nRow, aData) {
 		    // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
 		    $('td', nRow).unbind('click');
 		    $('td', nRow).bind('click', function() {
 		        $scope.$apply(function() {
-		            $scope.someClickHandler(aData);
+                    $scope.data = aData;
 		        });
 		    });
 		    return nRow;
-		}
+		};
 
-		$scope.someClickHandler = ClickHandler;
-		//datatable settings
+			//datatable settings
 	    $scope.dtOptions = DTOptionsBuilder.fromFnPromise(getData($timeout, $q))
 	        .withPaginationType('full_numbers')
 	        .withOption('rowCallback', rowCallback);
@@ -47,7 +74,7 @@ angular.module('admin').controller('ClassroomController', ['$scope', '$http', '$
 	        DTColumnBuilder.newColumn('category').withTitle('Category'),
 	        DTColumnBuilder.newColumn('number').withTitle('Number'),
 	   		DTColumnBuilder.newColumn('created').withTitle('Created'),
-	   
+
 	    ];
 	}
 ]);
