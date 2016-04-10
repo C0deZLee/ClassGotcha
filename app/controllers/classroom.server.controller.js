@@ -3,7 +3,19 @@
 var _ = require('lodash'),
 	errorHandler = require('./errors.server.controller'),
 	mongoose = require('mongoose'),
-	Classroom = mongoose.model('Classroom');
+	Classroom = mongoose.model('Classroom'),
+	uuid = require('uuid'), // https://github.com/defunctzombie/node-uuid
+	multiparty = require('multiparty'), // https://github.com/andrewrk/node-multiparty
+	s3 = require('s3'); // https://github.com/andrewrk/node-s3-client
+
+
+
+var s3Client = s3.createClient({
+  key: 'steveleelx',
+  secret: 'AmazonIamsteve18',
+  bucket: 'elasticbeanstalk-us-west-2-611212426196'
+});
+
 
 /**
  * Function for verify the existence of classroom
@@ -251,9 +263,7 @@ exports.getAll = function(req, res) {
 	});
 }
 
-/**
- * Get Classroom by ID
- */
+
  exports.getOne = function(req, res) {
  	var classroom = classroomByID(req.params.id);
 
@@ -266,9 +276,7 @@ exports.getAll = function(req, res) {
  	}
  }
 
- /**
-  * Get Classroom by ID
-  */
+ 
   exports.getInfo = function(req, res) {
   	// TODO: This function should return the basic info of class, not the whole class instance
   	var classroom = classroomByID(req.params.id);
@@ -281,3 +289,39 @@ exports.getAll = function(req, res) {
  		});
   	}
   }
+
+
+
+exports.uploadfile =function(req, res) {
+	console.log("here");
+    var form = new multiparty.Form();
+    form.parse(req, function(err, fields, files) {
+      var file = files.file[0];
+      var contentType = file.headers['content-type'];
+      var extension = file.path.substring(file.path.lastIndexOf('.'));
+      var destPath = '/' + req.user.id + '/profile' + '/' + uuid.v4() + extension;
+
+      var headers = {
+        'x-amz-acl': 'public-read',
+        'Content-Length': file.size,
+        'Content-Type': contentType
+      };
+      
+      var s3Client = s3.createClient({
+		  key: 'steveleelx',
+		  secret: 'AmazonIamsteve18',
+		  bucket: 'elasticbeanstalk-us-west-2-611212426196'
+		});
+
+      var uploader = s3Client.upload(file.path, destPath, headers);
+
+      uploader.on('error', function(err) {
+        //TODO handle this
+      });
+
+      uploader.on('end', function(url) {
+        //TODO do something with the url
+        console.log('file opened:', url);
+      });
+	});
+}

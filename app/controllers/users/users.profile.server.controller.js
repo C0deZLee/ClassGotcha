@@ -238,6 +238,12 @@ exports.uploadAvatar = function(req, res) {
             'Content-Length': buf.length,
             'Content-Type': 'image/png'
         };
+        var s3Client = s3.createClient({
+		    key: 'steveleelx',
+		    secret: 'AmazonIamsteve18',
+		    bucket: 'elasticbeanstalk-us-west-2-611212426196'
+		});
+
         var uploader = s3Client.upload(file.path, destPath, headers);
 
         uploader.on('error', function(err) {
