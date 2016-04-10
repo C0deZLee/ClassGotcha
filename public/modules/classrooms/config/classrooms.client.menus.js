@@ -10,10 +10,18 @@ angular.module('classrooms').run(['Menus',
             state: 'classroom',
             type: 'dropdown'
         });
-        // Add the dropdown list item
+
         Menus.addSubMenuItem('sidebar', 'classroom', {
             title: 'MATH 230',
             state: 'classroom'
         });
+
+      //   for(class in $scope.user.classroom){
+      //     // Add the dropdown list item
+      //     Menus.addSubMenuItem('sidebar', 'classroom', {
+      //         title: 'MATH 230',
+      //         state: 'classroom'
+      //     });
+      // }
     }
 ]);

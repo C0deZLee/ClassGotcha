@@ -24,7 +24,6 @@ angular.module('core').service('Menus', [
           }
         }
       }
-
       return false;
     };
 

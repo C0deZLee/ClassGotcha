@@ -7,13 +7,13 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var ChatSchema= new mongoose.Schema({
-	roomName:{ 
-		type: String, 
-		default: "Chat" 
-	},//分开private和group吗
+	roomName:{
+		type: String,
+		default: "Chat"
+	},
 
 	member: [{
-		type: Schema.Types.ObjectId, 
+		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}],
 	messages: [{
@@ -23,18 +23,18 @@ var ChatSchema= new mongoose.Schema({
 		},
 		text: String,
 		author: {
-			type: Schema.Types.ObjectId, 
+			type: Schema.Types.ObjectId,
 			ref: 'User'
 		},
-		create:{ 
-			type: Date, 
-			default: Date.now 
+		create:{
+			type: Date,
+			default: Date.now
 		}
 	}],
 
-	create:{ 
-		type: Date, 
-		default: Date.now 
+	create:{
+		type: Date,
+		default: Date.now
 	}
 
 });

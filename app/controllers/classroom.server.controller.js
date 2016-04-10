@@ -178,6 +178,7 @@ exports.addStudent = function(req, res) {
 		});
 
 	}
+});
 }
 
 /**
@@ -271,7 +272,7 @@ exports.getAll = function(req, res) {
  	}
  }
 
- 
+
   exports.getInfo = function(req, res) {
   	// TODO: This function should return the basic info of class, not the whole class instance
   	var classroom = classroomByID(req.params.id);
@@ -301,7 +302,7 @@ exports.uploadfile =function(req, res) {
         'Content-Length': file.size,
         'Content-Type': contentType
       };
-      
+
       var s3Client = s3.createClient({
 		  key: 'steveleelx',
 		  secret: 'AmazonIamsteve18',

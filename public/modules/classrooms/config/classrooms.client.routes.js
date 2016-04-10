@@ -13,7 +13,6 @@ angular.module('classrooms').config(['$stateProvider', '$urlRouterProvider',
 			url: '/classroom',
 			templateUrl: 'modules/classrooms/views/classrooms.client.view.html'
 
-
 		}).
 		state('c_notes',{
 			url:'/classroom/notes',

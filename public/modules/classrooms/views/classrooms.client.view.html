@@ -114,15 +114,15 @@
                     </div>
                 </div>
 
-                
-                        
-                
+
+
+
 
                 <div class="ibox">
                     <div class="ibox-content">
                         <h3>Class Material</h3>
                         <p>
-                        
+
                         <div class="btn-group">
                            <a type="button" ui-sref="c_notes" class="btn btn-info dropdown-toggle btn-lg "
                               data-toggle="dropdown">
@@ -158,7 +158,7 @@
                            </ul>-->
                         </div>
                         </p>
-                        
+
                         <p>
                         <div class="btn-group">
                            <button type="button" class="btn btn-primary dropdown-toggle btn-lg "
@@ -227,16 +227,49 @@
             <div class="col-lg-5">
               <div class="social-feed-box">
                   <div class="social-action">
-                        <textarea class="form-control" placeholder="Wanna say something?">
-                        </textarea>
-                        <a href="#" class="pull-right btn btn-sm btn-primary">Submit</a>
-                        <form action="">
-                          <input type="radio" name="gender" value="Problem">This is a problem<br>
-                        <input type="radio" name="gender" value="Announcement">This is an Announcement<br>
-                        </form>
+                        <textarea class="form-control" placeholder="Wanna say something?"></textarea>
+                        <input type="radio" name="gender" value="Problem">This is a problem
+                        <button ng-click="addPost()" class="pull-right btn btn-sm btn-primary">Submit</button>
+                        <br>
                   </div>
 
                 </div>
+                <div class="social-feed-box" ng-if="showPost">
+
+                    <div class="pull-right social-action dropdown">
+                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu m-t-xs">
+                            <li><a href="#">Report</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="social-avatar">
+                        <a href="" class="pull-left">
+                            <img alt="image" src="modules/classrooms/img/a4.jpg">
+                        </a>
+                        <div class="media-body">
+                            <a href="#">
+                                Steve Lee
+                            </a>
+                            <span class="label label-warning ">Question</span>
+                            <small class="text-muted">Today - 04.10.2016</small>
+                        </div>
+                    </div>
+                    <div class="social-body">
+                        <p>
+                           I'm stuck on Problem 4!
+                        </p>
+
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="social-feed-box">
 
                     <div class="pull-right social-action dropdown">
@@ -255,6 +288,7 @@
                             <a href="#">
                                 Andrew Williams
                             </a>
+                            <span class=" label label-primary">Solved</span>
                             <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
                         </div>
                     </div>
@@ -268,47 +302,6 @@
                             <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
                         </div>
                     </div>
-                    <div class="social-footer">
-                        <div class="social-comment">
-                            <a href="" class="pull-left">
-                                <img alt="image" src="modules/classrooms/img/a1.jpg">
-                            </a>
-                            <div class="media-body">
-                                <a href="#">
-                                    Andrew Williams
-                                </a>
-                                Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
-                                <br/>
-                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
-                                <small class="text-muted">12.06.2014</small>
-                            </div>
-                        </div>
-
-                        <div class="social-comment">
-                            <a href="" class="pull-left">
-                                <img alt="image" src="modules/classrooms/img/a2.jpg">
-                            </a>
-                            <div class="media-body">
-                                <a href="#">
-                                    Andrew Williams
-                                </a>
-                                Making this the first true generator on the Internet. It uses a dictionary of.
-                                <br/>
-                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
-                                <small class="text-muted">10.07.2014</small>
-                            </div>
-                        </div>
-
-                        <div class="social-comment">
-                            <a href="" class="pull-left">
-                                <img alt="image" src="modules/classrooms/img/a3.jpg">
-                            </a>
-                            <div class="media-body">
-                                <textarea class="form-control" placeholder="Write comment..."></textarea>
-                            </div>
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -319,7 +312,7 @@
                             <i class="fa fa-angle-down"></i>
                         </button>
                         <ul class="dropdown-menu m-t-xs">
-                            <li><a href="#">Config</a></li>
+                            <li><a href="#">Report</a></li>
                         </ul>
                     </div>
                     <div class="social-avatar">
@@ -328,15 +321,12 @@
                         </a>
                         <div class="media-body">
                             <a href="#">
-                                Andrew Williams
+                                Judy Hopps
                             </a>
                             <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
                         </div>
                     </div>
                     <div class="social-body">
-                        <p>
-                            Can someone help me with this problem? I cannot solve it!
-                        </p>
                         <p>
                             Lorem Ipsum as their
                             default model text, and a search for 'lorem ipsum' will uncover many web sites still
@@ -386,7 +376,7 @@
                             </a>
                             <div class="media-body">
                                 <a href="#">
-                                    Andrew Williams
+                                    Judy Hopps
                                 </a>
                                 Making this the first true generator on the Internet. It uses a dictionary of.
                                 <br/>
@@ -411,6 +401,27 @@
 
             <div class="col-lg-4 m-b-lg">
                 <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                  <div class="vertical-timeline-block">
+                      <div class="vertical-timeline-icon navy-bg">
+                          <i class="fa fa-question"></i>
+                      </div>
+
+                      <div class="vertical-timeline-content">
+                          <h2>Add a new due?</h2>
+                          <textarea class="form-control" placeholder="Homwwork due tomorrow?"></textarea>
+
+                          <a href="#" class="btn btn-sm btn-primary"> More info</a>
+                            <span class="vertical-date">
+                              <select>
+                                <option value ="volvo">Homework</option>
+                                <option value ="saab">Quiz</option>
+                                <option value="opel">Exam</option>
+                                <option value="audi">Meeting</option>
+                              </select>
+                            </span>
+                      </div>
+                  </div>
+
                     <div class="vertical-timeline-block">
                         <div class="vertical-timeline-icon navy-bg">
                             <i class="fa fa-briefcase"></i>
@@ -423,7 +434,7 @@
                             <a href="#" class="btn btn-sm btn-primary"> More info</a>
                                     <span class="vertical-date">
                                         Today <br>
-                                        <small>Jan 17</small>
+                                        <small>Apr 1</small>
                                     </span>
                         </div>
                     </div>
@@ -439,7 +450,7 @@
                             <a href="#" class="btn btn-sm btn-success"> Download document </a>
                                     <span class="vertical-date">
                                         Tomorrow <br>
-                                        <small>Jan 18</small>
+                                        <small>Apr 11</small>
                                     </span>
                         </div>
                     </div>
@@ -453,7 +464,7 @@
                             <h2>In-class Quiz</h2>
                             <p>Go to shop and find some products. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
                             <a href="#" class="btn btn-sm btn-danger">More Info</a>
-                            <span class="vertical-date"> Tomorrow <br><small>Jan 18</small></span>
+                            <span class="vertical-date"> Tomorrow <br><small>Apr 11</small></span>
                         </div>
                     </div>
 
@@ -466,7 +477,7 @@
                             <h2>Homework</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
                             <a href="#" class="btn btn-sm btn-success"> Download document </a>
-                            <span class="vertical-date">Yesterday <br><small>Dec 23</small></span>
+                            <span class="vertical-date"> In 2 days <br><small>Apr 12</small></span>
                         </div>
                     </div>
 
