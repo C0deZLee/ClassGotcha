@@ -8,14 +8,24 @@ var _ = require('lodash'),
 	multiparty = require('multiparty'), // https://github.com/andrewrk/node-multiparty
 	s3 = require('s3'); // https://github.com/andrewrk/node-s3-client
 
-
-
-var s3Client = s3.createClient({
-  key: 'steveleelx',
-  secret: 'AmazonIamsteve18',
-  bucket: 'elasticbeanstalk-us-west-2-611212426196'
+var client = s3.createClient({
+  
+  maxAsyncS3: 20,     // this is the default
+  s3RetryCount: 3,    // this is the default
+  s3RetryDelay: 1000, // this is the default
+  multipartUploadThreshold: 20971520, // this is the default (20 MB)
+  multipartUploadSize: 15728640, // this is the default (15 MB)
+  s3Options: {
+    accessKeyId: "steveleelx",
+    secretAccessKey: "AmazonIamsteve18",
+    region: "us-east-1",
+    signatureVersion: "v3",
+    // endpoint: 's3.yourdomain.com',
+    sslEnabled: false
+    // any other options are passed to new AWS.S3()
+    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
+  },
 });
-
 
 /**
  * Function for verify the existence of classroom
@@ -165,20 +175,17 @@ exports.addStudent = function(req, res) {
 				message: 'Classroom does not exist'
 			});
 		} else {
-		classroom.students.push(req.body);
-		classroom.update = Date.now();
+			classroom.students.push(req.body);
+			classroom.update = Date.now();
+			classroom.save(function(err) {
+				if(err) return res.status(400).send(err);
+				else return res.json(classroom);
+			});
 
-		classroom.save(function(err) {
-			if(err) {
-				return res.status(400).send(err);
-			}
-			else {
-				return res.json(classroom);
-			}
-		});
-
-	}
+		}
+	});
 }
+
 
 /**
  * Return all students of the classroom
@@ -288,31 +295,41 @@ exports.getAll = function(req, res) {
 
 
 exports.uploadfile =function(req, res) {
-	console.log("here");
     var form = new multiparty.Form();
     form.parse(req, function(err, fields, files) {
       var file = files.file[0];
       var contentType = file.headers['content-type'];
       var extension = file.path.substring(file.path.lastIndexOf('.'));
-      var destPath = '/' + req.user.id + '/profile' + '/' + uuid.v4() + extension;
+      //var destPath = '/' + req.user.id + '/profile' + '/' + uuid.v4() + extension;
+	var destPath = '/profile/img'+ extension;
 
       var headers = {
         'x-amz-acl': 'public-read',
         'Content-Length': file.size,
         'Content-Type': contentType
       };
-      
-      var s3Client = s3.createClient({
-		  key: 'steveleelx',
-		  secret: 'AmazonIamsteve18',
-		  bucket: 'elasticbeanstalk-us-west-2-611212426196'
-		});
+      	
+		var params = {
+		  localFile: file.path,
 
-      var uploader = s3Client.upload(file.path, destPath, headers);
+		  s3Params: {
+		    Bucket: "elasticbeanstalk-us-west-2-611212426196",
+		    Key: destPath,
+		    // other options supported by putObject, except Body and ContentLength.
+		    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+		  },
+		};
+		var uploader = client.uploadFile(params);
+	console.log("here");
+     
+      
 
       uploader.on('error', function(err) {
         //TODO handle this
+	console.log(err);
+
       });
+	console.log("here2");
 
       uploader.on('end', function(url) {
         //TODO do something with the url
