@@ -21,4 +21,5 @@ module.exports = function(app) {
 
     app.get('/api/0.1/class/:id/dues', users.hasAuthorization(['user']), classroom.getDues);
     app.post('/api/0.1/class/:id/dues', users.hasAuthorization(['user']), classroom.addDue);
+    app.post('/api/0.1/upload/image',users.hasAuthorization(['user']),classroom.uploadfile); 
 }
