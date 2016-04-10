@@ -1,13 +1,12 @@
 'use strict';
 
 
-angular.module('classrooms').controller('DashboardController', ['$scope', 'Authentication',
-	function($scope, Authentication) {
+angular.module('classrooms').controller('ClassroomController', ['$scope', '$http','Authentication',
+	function($scope, $http, Authentication) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
-
-		// Some example string
-		$scope.helloText = 'Welcome in INSPINIA MEAN.JS Boilerplate';
-		$scope.descriptionText = 'It is an application skeleton for a typical MEAN web app. You can use it to quickly bootstrap your project.';
+		$scope.addStudent = funtion(){
+			$http.post('/api/0.1/class/5709cb50b3baf0cc216a6d1f/students')
+		}
 	}
 ]);

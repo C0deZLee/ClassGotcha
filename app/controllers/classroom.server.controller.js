@@ -13,7 +13,7 @@ var classroomByID = function(id) {
 	Classroom.findOne({
 		_id: id
 	}).exec(function(err, classroom) {
-		if (err) return false;
+		//if (err) return false;
 		if (!classroom) return false;
 		return classroom;
 	});
@@ -43,7 +43,7 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res){
 	//Init Vairables
-
+	console.log(req.params.id);
 	var classroom = classroomByID(req.params.id);
 
 	// If class room exist
