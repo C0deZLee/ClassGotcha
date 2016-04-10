@@ -6,7 +6,9 @@ var _ = require('lodash'),
 	Classroom = mongoose.model('Classroom'),
 	uuid = require('uuid'), // https://github.com/defunctzombie/node-uuid
 	multiparty = require('multiparty'), // https://github.com/andrewrk/node-multiparty
-	s3 = require('s3'); // https://github.com/andrewrk/node-s3-client
+	s3 = require('s3'), // https://github.com/andrewrk/node-s3-client
+    AWS = require('aws-sdk');
+
 
 var client = s3.createClient({
 
@@ -336,3 +338,34 @@ exports.uploadfile =function(req, res) {
       });
 	});
 }
+
+
+
+exports.downloadfile = function(req, res){
+
+	var remote_filepath = '/profile/img.png'
+
+	var params = {
+	  localFile: "./img.png",
+
+	  s3Params: {
+	    Bucket: "elasticbeanstalk-us-west-2-611212426196",
+	    Key: remote_filepath,
+	    // other options supported by getObject
+	    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getObject-property
+	  },
+	};
+	var downloader = client.downloadFile(params);
+	downloader.on('error', function(err) {
+	  console.error("unable to download:", err.stack);
+	});
+	downloader.on('progress', function() {
+	  console.log("progress", downloader.progressAmount, downloader.progressTotal);
+	});
+	downloader.on('end', function() {
+	  console.log("done downloading");
+	});
+	}
+
+
+

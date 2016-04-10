@@ -1,10 +1,18 @@
 'use strict';
 
 
-angular.module('classrooms').controller('NoteController', ['$scope', 'Authentication', 'Upload',
-	function($scope, Authentication, Upload) {
+angular.module('classrooms').controller('NoteController', ['$scope', 'Authentication', 'Upload', '$http',
+	function($scope, Authentication, Upload, $http) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+
+		$scope.getpic = function(){
+			$http.post('/api/0.1/download/image')
+			
+			var path = 'https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-611212426196//profile/img.png'
+	
+			$http.get(path)
+		}
 
 		$scope.onFileSelect = function(image) {
 			console.log("here");
@@ -50,4 +58,6 @@ angular.module('classrooms').controller('NoteController', ['$scope', 'Authentica
     });
     }
 	}
+
+
 ]);
