@@ -12,7 +12,7 @@ angular.module('classrooms').run(['Menus',
         });
         // Add the dropdown list item
         Menus.addSubMenuItem('sidebar', 'classroom', {
-            title: 'Class1',
+            title: 'MATH 230',
             state: 'classroom'
         });
     }

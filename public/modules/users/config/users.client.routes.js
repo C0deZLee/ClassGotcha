@@ -1,8 +1,12 @@
 'use strict';
 
 // Setting up route
-angular.module('users').config(['$stateProvider',
-	function($stateProvider) {
+angular.module('users').config(['$stateProvider', '$urlRouterProvider'
+	function($stateProvider, $urlRouterProvider) {
+
+		// Redirect to home view when route not found
+		$urlRouterProvider.otherwise('/');
+
 		// Users state routing
 		$stateProvider.
 		state('profile', {
