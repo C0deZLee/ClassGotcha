@@ -18,6 +18,10 @@ angular.module('classrooms').config(['$stateProvider', '$urlRouterProvider',
 			url:'/classroom/notes',
 			templateUrl:'modules/classrooms/views/notes.client.view.html'
 
+		}).
+		state('syllabus', {
+			url:'/classroom/syllabus',
+			templateUrl:'modules/classrooms/views/syllabus.client.view.html'
 		});
 
 	}

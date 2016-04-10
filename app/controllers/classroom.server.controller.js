@@ -308,16 +308,7 @@ exports.uploadfile =function(req, res) {
         'Content-Length': file.size,
         'Content-Type': contentType
       };
-<<<<<<< HEAD
 
-      var s3Client = s3.createClient({
-		  key: 'steveleelx',
-		  secret: 'AmazonIamsteve18',
-		  bucket: 'elasticbeanstalk-us-west-2-611212426196'
-		});
-
-      var uploader = s3Client.upload(file.path, destPath, headers);
-=======
 
 		var params = {
 		  localFile: file.path,
@@ -331,9 +322,6 @@ exports.uploadfile =function(req, res) {
 		};
 		var uploader = client.uploadFile(params);
 	console.log("here");
-
-
->>>>>>> origin/master
 
       uploader.on('error', function(err) {
         //TODO handle this
