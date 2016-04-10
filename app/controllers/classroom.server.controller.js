@@ -9,11 +9,10 @@ var _ = require('lodash'),
  * Function for verify the existence of classroom
  * @param id The id of classroom model
  */
+
 var classroomByID = function(id) {
-	Classroom.findOne({
-		_id: id
-	}).exec(function(err, classroom) {
-		//if (err) return false;
+	Classroom.findOne({_id: id}).exec(function(err, classroom) {
+		if (err) return err;
 		if (!classroom) return false;
 		return classroom;
 	});
@@ -29,7 +28,7 @@ exports.create = function(req, res) {
 	// TODO:When create classroom, if the professor doesn’t exist, we should create a prof first
 	classroom.save (function(err) {
 		if (err) {
-			return res.status(400).send(err);
+			return res.status(404).send(err);
 		}
 		else {
 			return res.json(classroom);
@@ -43,30 +42,27 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res){
 	//Init Vairables
-	console.log(req.params.id);
-	var classroom = classroomByID(req.params.id);
-
-	// If class room exist
-	if (classroom) {
-		// Update it
-		classroom = _.extend(classroom, req.body);
-		classroom.update = Date.now();
-
-		classroom.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
+		Classroom.findOne({_id: req.params.id}).exec(function(err, classroom) {
+			if (err || !classroom) {
+				res.status(404).send({
+					message: 'Classroom does not exist'
 				});
 			} else {
-				return res.json(classroom);
-			}
-		});
+			// Update it
+			classroom = _.extend(classroom, req.body);
+			classroom.update = Date.now();
 
-	} else {
-		res.status(400).send({
-			message: 'Classroom does not exist'
-		});
-	}
+			classroom.save(function(err) {
+				if (err) {
+					return res.status(404).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					return res.json(classroom);
+				}
+			});
+		}
+	});
 }
 
 /**
@@ -82,7 +78,7 @@ exports.remove = function(req, res) {
 		// Remove it
 		classroom.remove(function(err) {
 			if(err) {
-				return res.status(400).send(err);
+				return res.status(404).send(err);
 			}
 			else {
 				return res.json(classroom);
@@ -90,7 +86,7 @@ exports.remove = function(req, res) {
 		});
 
 	} else {
-		res.status(400).send({
+		res.status(404).send({
 			message: 'Classroom does not exist'
 		});
 	}
@@ -112,7 +108,7 @@ exports.addDue = function(req, res) {
 
 		classroom.save(function(err) {
 			if(err) {
-				return res.status(400).send(err);
+				return res.status(404).send(err);
 			}
 			else {
 				return res.json(classroom);
@@ -120,7 +116,7 @@ exports.addDue = function(req, res) {
 		});
 
 	} else {
-		res.status(400).send({
+		res.status(404).send({
 			message: 'Classroom does not exist'
 		});
 	}
@@ -139,7 +135,7 @@ exports.getDues = function(req, res) {
 
 
 	} else {
-		res.status(400).send({
+		res.status(404).send({
 			message: 'Classroom does not exist'
 		});
 	}
@@ -151,9 +147,12 @@ exports.getDues = function(req, res) {
  * @param id The id of classroom model
  */
 exports.addStudent = function(req, res) {
-	var classroom = classroomByID(req.params.id);
-
-	if (classroom) {
+	Classroom.findOne({_id: req.params.id}).exec(function(err, classroom) {
+		if (err || !classroom) {
+			res.status(404).send({
+				message: 'Classroom does not exist'
+			});
+		} else {
 		classroom.students.push(req.body);
 		classroom.update = Date.now();
 
@@ -166,10 +165,6 @@ exports.addStudent = function(req, res) {
 			}
 		});
 
-	} else {
-		res.status(400).send({
-			message: 'Classroom does not exist'
-		});
 	}
 }
 
