@@ -41,46 +41,33 @@
         </ul>
         <ul class="nav navbar-top-links navbar-right">
         <div class="btn-group">
-                           <button type="button" class="btn btn-primary dropdown-toggle btn-sm dim" 
+                           <button type="button" class="btn btn-primary dropdown-toggle btn-sm dim"
                               data-toggle="dropdown">Weather
                                <span class="fa fa-umbrella"> </span>
                            </button>
-                           
+
                            <ul class="dropdown-menu" role="menu">
-                       
+
                             <div class="ibox-content">
 
                             <table class="table table-hover">
-                                <thead>
                                 <tr>
-                                    
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    
-                                    
                                     <td>Weather </td>
-                                    <td class="text-navy"> <i class="fa fa-cloud"></i> {{weather_data.WeatherText}} </td>
+                                    <td class="text-navy"> <i class="fa fa-sun"></i> {{weather_data.WeatherText}} </td>
                                 </tr>
                                 <tr>
-                                    
-                                    
                                     <td>Temperature</td>
-                                    <td class="text-warning"> <i class="fa fa-tachometer"></i>  {{weather_data.Temperature.Metric.Value}}  {{weather_data.Temperature.Metric.Unit}}</td>
+                                    <td class="text-warning">  {{weather_data.Temperature.Metric.Value}}  {{weather_data.Temperature.Metric.Unit}}</td>
                                 </tr>
                                 <tr>
-                                   
-                                    
                                     <td>Location</td>
-                                    <td class="text-navy"> <i class="fa fa-university"></i> {{location_data.LocalizedName}}</td>
+                                    <td class="text-navy"> {{location_data.LocalizedName}}</td>
                                 </tr>
-                                </tbody>
                             </table>
                         </div>
 
                             <!-- <ul class="list-unstyled file-list">
-                            
+
 
                             <li><a href=""><i class="fa fa-globe"></i> Weather : {{weather_data.WeatherText}}</a></li>
                             <li><a href=""><i class="fa fa-file-picture-o"></i> Temperature: {{weather_data.Temperature.Value}}</a></li>
@@ -89,7 +76,7 @@
                             <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Video Lecture</a></li>
                             <li><a href=""><i class="fa fa-file"></i> More</a></li>
                         </ul> -->
-                           </ul> 
+                           </ul>
                         </div>
                         </ul>
     </nav>

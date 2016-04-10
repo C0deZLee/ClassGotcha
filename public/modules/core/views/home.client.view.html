@@ -37,10 +37,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-6">
-        <div class="flot-chart dashboard-chart" ng-controller="dashboardFlotOne as chart">
-
-        </div>
+    <div class="col-sm-8">
+          <div ui-calendar="uiConfig.calendar"  class="calendar" ng-model="eventSources"></div>
     </div>
 </div>
 <div class="row">
@@ -50,7 +48,7 @@
 <div class="col-lg-4">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>New data for the report</h5> <span class="label label-primary">IN+</span>
+            <h5>New Message!</h5> <span class="label label-primary">IN+</span>
             <div ibox-tools></div>
         </div>
         <div class="ibox-content">
@@ -59,11 +57,11 @@
                 <div class="pull-right text-right">
                     <bar-chart data="main.BarChart.data" options="main.BarChart.options"></bar-chart>
                     <br/>
-                    <small class="font-bold">$ 20 054.43</small>
+                    <small class="font-bold">4/10 14:05pm</small>
                 </div>
-                <h4>NYS report new data!
+                <h4>CS 311 TA replied your question!
                     <br/>
-                    <small class="m-r"><a ui-sref="flot_chart"> Check the stock price! </a></small>
+                    <small class="m-r"><a ui-sref="flot_chart"> Click here to see! </a></small>
                 </h4>
             </div>
         </div>
@@ -125,7 +123,7 @@
                 <div class="feed-activity-list">
 
                     <div class="feed-element">
-                    j    <a ui-sref="profile" class="pull-left">
+                       <a ui-sref="profile" class="pull-left">
                             <img alt="image" class="img-circle" src="modules/classrooms/img/profile.jpg">
                         </a>
 

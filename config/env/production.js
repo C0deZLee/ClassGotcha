@@ -6,9 +6,10 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-                'public/lib/metisMenu/dist/metisMenu.min.css',
-                'public/lib/fontawesome/css/font-awesome.min.css',
-                'public/lib/datatables/media/css/dataTables.bootstrap.min.css'
+        'public/lib/metisMenu/dist/metisMenu.min.css',
+        'public/lib/fontawesome/css/font-awesome.min.css',
+        'public/lib/datatables/media/css/dataTables.bootstrap.min.css',
+				'public/lib/fullcalendar/dist/fullcalendar.css'
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.min.js',
@@ -31,8 +32,12 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-datatables/dataTables/angular-datatables.min.js',
 				'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
-				'public/lib/ng-file-upload/ng-file-upload-all.min.js'
+				'public/lib/ng-file-upload/ng-file-upload-all.min.js',
 				//'public/lib/Responsive/js/dataTables.responsive.min.js'
+				'public/lib/moment/min/moment.min.js',
+				'public/lib/angular-ui-calendar/src/calendar.js',
+				'public/lib/fullcalendar/dist/fullcalendar.min.js',
+				'public/lib/fullcalendar/dist/gcal.js'
 			]
 		},
 		css: [
