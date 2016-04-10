@@ -9,23 +9,24 @@ var mongoose = require('mongoose'),
 var ClassRoomSchema = new mongoose.Schema({
 	name: String,
 	classCode: Number,
-	category: String,//Math
-	number: Number,
+	category: String, 	// Math
+	number: Number, 	  // 230
 
 	professor: {
-		type: Schema.Types.ObjectId, 
+		type: Schema.Types.ObjectId,
 		ref: 'Professor'
 		},
+
 	syllabus: {
-		data:Buffer,
+		data:String,
 		contentType:String
 	},
 	students: [{
-		type: Schema.Types.ObjectId, 
+		type: Schema.Types.ObjectId,
 		ref: 'User'
-	}],	
+	}],
 	notes: [{
-		type: Schema.Types.ObjectId, 
+		type: Schema.Types.ObjectId,
 		ref: 'Note'
 	}],
 	due: [{
@@ -51,18 +52,18 @@ var ClassRoomSchema = new mongoose.Schema({
 		}
 	}],
 	courseChat: {
-		type: Schema.Types.ObjectId, 
+		type: Schema.Types.ObjectId,
 		ref: 'Chat'
 	},
-	created: { 
-		type: Date, 
-		default: Date.now 
+	created: {
+		type: Date,
+		default: Date.now
 	},
 	updated: {
 		type: Date,
 		default: Date.now
 	}
-	
+
 });
 
 mongoose.model('Classroom',ClassRoomSchema);
