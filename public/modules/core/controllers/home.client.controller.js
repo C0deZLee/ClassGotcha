@@ -102,6 +102,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	    $scope.uiConfig = {
 	      calendar:{
 	        height: 300,
+	        defaultView: "weekDay",
 	        editable: true,
 	        header:{
 	          left: 'agendaWeek',
