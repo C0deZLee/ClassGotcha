@@ -10,14 +10,14 @@ angular.module('users').run(['Menus',
             state: 'profile',
             type: 'dropdown'
         });
-         Menus.addSubMenuItem('sidebar', 'profile', {
-            title: 'Profile',
-            state: 'profile'
-        });
         // Add the dropdown list item
         Menus.addSubMenuItem('sidebar', 'profile', {
             title: 'Settings',
             state: 'settings'
         });
+        Menus.addSubMenuItem('sidebar', 'profile', {
+           title: 'Profile',
+           state: 'profile'
+       });
     }
 ]);

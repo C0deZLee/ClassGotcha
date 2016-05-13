@@ -45,7 +45,8 @@ module.exports = {
 				'public/lib/moment/min/moment.min.js',
 				'public/lib/angular-ui-calendar/src/calendar.js',
 				'public/lib/fullcalendar/dist/fullcalendar.min.js',
-				'public/lib/fullcalendar/dist/gcal.js'
+				'public/lib/fullcalendar/dist/gcal.js',
+				'public/lib/Chart.js/Chart.min.js'
 			]
 		},
 		css: [

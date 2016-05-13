@@ -10,8 +10,8 @@ angular.module('users').config(['$stateProvider', '$urlRouterProvider',
 		// Users state routing
 		$stateProvider.
 		state('profile', {
-			url: '/settings/profile',
-			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
+			url: '/profile',
+			templateUrl: 'modules/users/views/settings/profile.client.view.html'
 		}).
 		state('password', {
 			url: '/settings/password',
